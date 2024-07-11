@@ -73,5 +73,16 @@ public class Validator {
             throw new BadRequestException("Invalid SkuCode");
         }
     }
+    public static void validateGetAllProductsParameters(ProductSearchDTO productSearchDTO) throws BadRequestException {
+        if (productSearchDTO.getClient_id() == null || productSearchDTO.getClient_id() <= 0) {
+            throw new BadRequestException("Invalid or missing client ID: " + productSearchDTO.getClient_id());
+        }
+        if (productSearchDTO.getOffset() == null || productSearchDTO.getOffset() < 0) {
+            productSearchDTO.setOffset(0);
+        }
+        if (productSearchDTO.getLimit() == null || productSearchDTO.getLimit() <= 0) {
+            productSearchDTO.setLimit(10);
+        }
+    }
 
 }

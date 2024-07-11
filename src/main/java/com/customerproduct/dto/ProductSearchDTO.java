@@ -8,7 +8,7 @@ import java.sql.Timestamp;
 public class ProductSearchDTO {
     private int id;
     private int emp_id;
-    private int client_id;
+    private Integer client_id;
     private String name;
     private String skuCode;
     private Timestamp last_modified_date;

@@ -54,8 +54,9 @@ public class ProductDAO implements ProductRepository {
         Session session = sessionFactory.openSession();
         List<Product> products = null;
         try {
-            String hql = "FROM Product";
+            String hql = "FROM Product p WHERE p.client_id=:client_id";
             Query query = session.createQuery(hql, Product.class);
+            query.setParameter("client_id",productSearchDTO.getClient_id());
             query.setFirstResult(productSearchDTO.getOffset() * productSearchDTO.getLimit());
             query.setMaxResults(productSearchDTO.getLimit());
             products = query.getResultList();

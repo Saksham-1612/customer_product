@@ -63,6 +63,8 @@ public class ProductController {
     public ResponseEntity<?> getAllProducts(@Parameter(description = "Search criteria for retrieving product")  @RequestBody ProductSearchDTO productSearchDTO) {
         try {
             log.info("Getting all products with SearchDTO{}",productSearchDTO);
+            Validator.validateGetAllProductsParameters(productSearchDTO);
+
             List<Product> products=productService.getAllProducts(productSearchDTO);
             if (!products.isEmpty()) {
                 return ResponseEntity.ok(CustomerProductUtils.setResponse("Products found", products));
@@ -80,6 +82,8 @@ public class ProductController {
     @PostMapping(value = "/get-product")
     public ResponseEntity<?> getProduct(@Parameter(description = "Search criteria for retrieving a product", required = true) @RequestBody ProductSearchDTO productSearchDTO) {
         try {
+            Validator.validateGetAllProductsParameters(productSearchDTO);
+
             List<Product> products=productService.getProduct(productSearchDTO);
             if (!products.isEmpty()) {
                 return ResponseEntity.ok(CustomerProductUtils.setResponse("Products found", products));
